@@ -13,12 +13,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $from = $post['email'];
   $subject = 'お問い合わせが届きました';
   $body = <<<EOT
+  お名前：{$post['name']}
   メールアドレス:{$post['email']}
   件名:{$post['subject']}
-  本文:{$post['contact']}
+  本文:{$post['mail_body']}
   EOT;
 
-    var_dump($body);
+    //var_dump($body);
     //exit();
     mb_send_mail($to,$subject,$body,"From:{$from}");
 
@@ -27,12 +28,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $from = 'ysbookstore2020@gmail.com';;
     $subject = '以下の内容で問い合わせを受け付けました。';
     $body = <<<EOT
+    {$post['name']}様
+    お問い合わせありがとうございます。以下の内容で受け付けさせていただきました。
+    お名前:{$post['name']}
     メールアドレス:{$post['email']}
     件名:{$post['subject']}
-    本文:{$post['contact']}
+    本文:{$post['mail_body']}
+    後ほど、ご連絡をさせていただきます。よろしくお願いします。
     EOT;
 
-      var_dump($body);
+      //var_dump($body);
       //exit();
       mb_send_mail($to,$subject,$body,"From:{$from}");
 
@@ -71,6 +76,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
       <form action="" method="POST">
         <h1>この内容で送信しますか？</h1>
+        <div class="form-group">
+        <div>お名前</div>
+        <p><?php echo htmlspecialchars($post['name']);?></p>
+        </div>
         <div class="form-group">
         <div>メールアドレス</div>
         <p><?php echo htmlspecialchars($post['email']);?></p>

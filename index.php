@@ -6,6 +6,9 @@ $error =[];
 if($_SERVER['REQUEST_METHOD']==='POST'){
 
   $post = filter_input_array(INPUT_POST,$_POST);
+  if($post['name']===''){
+    $error['name'] = 'blank';
+  }
   if($post['email']===''){
     $error['email'] = 'blank';
   }elseif(!filter_var($post['email'],FILTER_VALIDATE_EMAIL)){
@@ -173,6 +176,11 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <h1 class="display-3">Contact</h1>
     <p>メールでの各種お問い合わせはこちらから</p>
     <form method="POST" action="">
+      <div class="form-group">
+        <label for="examplename">お名前</label>
+        <input type="text" class="form-control" name="name" placeholder="お名前" value="<?php echo htmlspecialchars($post['name']) ;?>">
+        <?php if($error['name']==='blank'): ?><p class ="error_msg">お名前は必須入力です。</p><?php endif; ?>
+      </div>
     <div class="form-group">
       <label for="exampleInputEmail1">メールアドレス</label>
       <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="メールアドレス" value="<?php echo htmlspecialchars($post['email']) ;?>">
