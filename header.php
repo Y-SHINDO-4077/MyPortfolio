@@ -2,6 +2,8 @@
 <html lang="ja">
 <head>
  <title>TOP</title>
+ <!-- jqueryの読み込む -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/litera/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gr51humlTz50RfCwdBYgT+XvbSZqkm8Loa5nWlNrvUqCinoe6C6WUZKHS2WIRx5o" crossorigin="anonymous">
  <style>
  header{
@@ -19,7 +21,7 @@
 <body>
   <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/MyPortfolio/index.php">HOME</a>
+    <a class="navbar-brand" href="/MyPortfolio/index.php">Do's Portfolio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,23 +32,27 @@
           <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="#profile">Profile</a>
         </li>
 
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+          <a class="nav-link" href="#sa">Skills/Archievement</a>
+        </li>
+
+       <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#sa" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Skills/Archievement
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Works</a>
-          <a class="dropdown-item" href="#">Tech Skills</a>
+          <a class="dropdown-item" href="./Work.php">Works</a>
+          <a class="dropdown-item" href="./techskills.php">Tech Skills</a>
           <a class="dropdown-item" href="./DNUetc.php">DNU etc</a>
-          <a class="dropdown-item" href="#">Other Skills</a>
+          <a class="dropdown-item" href="./otherskills.php">Other Skills</a>
         </div>
-      </li>
+      </li> -->
 
       <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="#contact">Contact</a>
         </li>
       </ul>
       <!-- <form class="form-inline my-2 my-lg-0">
@@ -88,6 +94,23 @@ $('li.dropdown').hover(function(){
   moving = false;
 });
 });
+
+$(function(){
+  //#で始まるhrefをクリックした時
+  $('a[href^="#"]').click(function(){
+    //スピード400
+    var speed = 400;
+    //アンカーの値を取得
+    var href = $(this).attr("href");
+    //移動先を取得
+    var target = $(href =="#" || href == "" ? 'html' : href);
+    //移動先を数値で取得
+    var position = target.offset().top -65;
+    //スムーススクロール animate(cssプロパティ,完了するまでの時間,挙動)
+    $('body,html').animate({scrollTop:position},speed,'swing');
+    return false;
+    });
+  });
 </script>
 </body>
 </html>
